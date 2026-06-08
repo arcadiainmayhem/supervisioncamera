@@ -6,6 +6,7 @@ from camera_manager import CameraManager
 
 
 
+
 app = Flask(__name__)
 camera = CameraManager() #instance camera manager
 camera.start() #start camera
@@ -19,6 +20,7 @@ def health():
     return {"status" : "Camera Unavailable"},503
 
 def generate_frames():
+    global last_frame_time
     while True:
         try:
             time.sleep(1/STREAM_FRAME_RATE)
@@ -26,6 +28,7 @@ def generate_frames():
             if frame is None:
                 print("[CAMERASERVER] Stream - no frame, stopping")
                 break
+            last_frame_time = time.time() #update on each frame
 
             success , jpeg = cv2.imencode(".jpg" , frame)
 
@@ -76,6 +79,15 @@ def stream():
     except Exception as e:
         print(f"[CAMERASERVER] Stream route failed : {e}")
         return {"error" : str(e)},500
+
+@app.route('/status')
+
+def status():
+    return {
+        "camera" : "ok" if camera.isAvailable else "unavailable",
+        "last_frame" : last_frame_time,
+        "stream_age_seconds":round(time.time() - last_frame_time , 1) if last_frame_time else None
+    }, 200
 
 if __name__ == "__main__":
     app.run(host = "0.0.0.0",port = SERVER_PORT) #0.0.0.0 means it'll listen to all interfaces ( ethernet / wifi )
