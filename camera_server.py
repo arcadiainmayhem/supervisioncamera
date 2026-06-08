@@ -90,4 +90,4 @@ def status():
     }, 200
 
 if __name__ == "__main__":
-    app.run(host = "0.0.0.0",port = SERVER_PORT) #0.0.0.0 means it'll listen to all interfaces ( ethernet / wifi )
+    app.run(host = "0.0.0.0",port = SERVER_PORT, threaded= True) #0.0.0.0 means it'll listen to all interfaces ( ethernet / wifi )
