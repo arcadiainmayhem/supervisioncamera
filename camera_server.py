@@ -89,5 +89,8 @@ def status():
         "stream_age_seconds":round(time.time() - last_frame_time , 1) if last_frame_time else None
     }, 200
 
+
+#stream forwarding
+
 if __name__ == "__main__":
     app.run(host = "0.0.0.0",port = SERVER_PORT, threaded= True) #0.0.0.0 means it'll listen to all interfaces ( ethernet / wifi )
