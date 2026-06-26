@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 from camera_constants import *
 from picamera2 import Picamera2
-
+from time import time
 from libcamera import controls
 
 class CameraManager:
