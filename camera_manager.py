@@ -52,6 +52,11 @@ class CameraManager:
             
             print("[CAMERAMANAGER] CAMERA STARTED" )
 
+            import time
+            time.sleep(2)                                    # let AF settle
+            pos = self.cam.capture_metadata().get("LensPosition")
+            print(f"[CAMERAMANAGER] AF settled at LensPosition: {pos}")
+
         except Exception as e:
             print(f"[CAMERAMANAGER] Camera failed to start : {e}")
             self.isAvailable = False
