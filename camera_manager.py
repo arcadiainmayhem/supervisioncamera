@@ -3,6 +3,8 @@ import numpy as np
 from camera_constants import *
 from picamera2 import Picamera2
 
+from libcamera import controls
+
 class CameraManager:
 
     def __init__(self):
@@ -42,7 +44,12 @@ class CameraManager:
             self.cam.configure(config)
             #start camera
             self.cam.start()    
-
+            #focus
+            print(self.cam.camera_controls)
+            self.cam.set_controls({
+                "AfMode": controls.AfmodeEnum.Manual,
+                "LensPosition": 1.0 #diotres = 1 / distance in metres
+            })
             #flip flag
             self.isAvailable = True
             

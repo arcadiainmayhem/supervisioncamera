@@ -6,7 +6,6 @@ from camera_manager import CameraManager
 
 
 
-
 app = Flask(__name__)
 camera = CameraManager() #instance camera manager
 camera.start() #start camera
