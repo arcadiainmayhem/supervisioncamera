@@ -47,7 +47,7 @@ class CameraManager:
             #focus
             print(self.cam.camera_controls)
             self.cam.set_controls({
-                "AfMode": controls.AfmodeEnum.Manual,
+                "AfMode": controls.AfModeEnum.Manual,
                 "LensPosition": 1.0 #diotres = 1 / distance in metres
             })
             #flip flag
