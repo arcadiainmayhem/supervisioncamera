@@ -46,7 +46,6 @@ class CameraManager:
             self.cam.start()    
             #focus + delay
             time.sleep(1.0)                       # let the actuator come ready
-            print(self.cam.camera_controls)
             self.cam.set_controls({"AfMode": controls.AfModeEnum.Manual,
                                    "LensPosition":LENS_POSITION})
             #flip flag
@@ -66,7 +65,7 @@ class CameraManager:
     def capture(self):
         #if no cam object, return None
         if not self.isAvailable:
-            print("[CAMERAMANAGER] Capture Failed - camera no available")
+            print("[CAMERAMANAGER] Capture Failed - camera not available")
             return None
         
         try:
