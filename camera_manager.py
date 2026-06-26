@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 from camera_constants import *
 from picamera2 import Picamera2
-from time import time
 from libcamera import controls
 
 class CameraManager:
@@ -45,7 +44,6 @@ class CameraManager:
             #start camera
             self.cam.start()    
             #focus + delay
-            time.sleep(1.0)                       # let the actuator come ready
             self.cam.set_controls({"AfMode": controls.AfModeEnum.Manual,
                                    "LensPosition":LENS_POSITION})
             #flip flag
