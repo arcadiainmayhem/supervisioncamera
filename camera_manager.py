@@ -46,7 +46,8 @@ class CameraManager:
             self.cam.start()    
             #focus
             print(self.cam.camera_controls)
-            self.cam.set_controls({"AfMode": controls.AfModeEnum.Continuous})
+            self.cam.set_controls({"AfMode": controls.AfModeEnum.Manual,
+                                   "LensPosition":LENS_POSITION})
             #flip flag
             self.isAvailable = True
             
