@@ -44,7 +44,8 @@ class CameraManager:
             self.cam.configure(config)
             #start camera
             self.cam.start()    
-            #focus
+            #focus + delay
+            time.sleep(1.0)                       # let the actuator come ready
             print(self.cam.camera_controls)
             self.cam.set_controls({"AfMode": controls.AfModeEnum.Manual,
                                    "LensPosition":LENS_POSITION})
