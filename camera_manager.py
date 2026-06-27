@@ -51,7 +51,7 @@ class CameraManager:
 
             self.cam.set_controls({
                 "AfMode":controls.AfModeEnum.Manual,
-                'LensPositon':pos,
+                'LensPosition':pos,
             })
             #flip flag
             self.isAvailable = True
