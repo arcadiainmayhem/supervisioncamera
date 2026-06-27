@@ -3,6 +3,7 @@ import numpy as np
 from camera_constants import *
 from picamera2 import Picamera2
 from libcamera import controls
+import time 
 
 class CameraManager:
 
@@ -44,11 +45,17 @@ class CameraManager:
             #start camera
             self.cam.start()    
             #focus + delay
-            self.cam.set_controls({"AfMode": controls.AfModeEnum.Manual,
-                                   "LensPosition":LENS_POSITION})
+            self.cam.set_controls({"AfMode": controls.AfModeEnum.Continuous})
+            time.sleep(2.0)
+            pos = self.cam.capture_metadata().get("LensPosition")
+
+            self.cam.set_controls({
+                "AfMode":controls.AfModeEnum.Manual,
+                'LensPositon':pos,
+            })
             #flip flag
             self.isAvailable = True
-            
+            print(f"[CAMERAMANAGER] Locked at {pos}")
             print("[CAMERAMANAGER] CAMERA STARTED" )
 
             import time
